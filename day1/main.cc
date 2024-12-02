@@ -56,12 +56,31 @@ int part2_soln (std::vector<int> first, std::vector<int> second) {
     return result;
 } 
 
-int main () {
+int main (int argc, char* argv[]) {
 
     std::vector<int> first;
     std::vector<int> second;
 
-    read_input (first, second, "day1/input.txt");
+
+    if (argc < 2) {  // this implicitly checks for null argv[1]
+	std::cerr << "No argument provided. Please use either 'full' or 'test' as args depending on which dataset you want to use\n";
+	return 1;
+    }
+
+    if (std::string(argv[1]) == "full") {
+
+	std::cout << "Full Input is being used" << std::endl;
+	read_input (first, second, "day1/input.txt");
+    }
+    else if (std::string(argv[1]) == "test") {
+	std::cout << "Test Input is being used" << std::endl;
+	read_input (first, second, "day1/test.txt");
+    }
+
+    else {	
+	std::cout << "Incorrect input specified. Please use either full or test" << std::endl;
+    }
+
     
     //Part 1
     int result_p1 = part1_soln(first, second);
